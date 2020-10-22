@@ -10,7 +10,7 @@
     <h1>passage: <%= passage.passage %></h1>
 
     <form action="/<%= passage['_id'] %>" method="POST">
-      <textarea name="passage"><%= passage.passage %></textarea>
+      <input type="text" name="passage" value="<%= passage.passage %>">
       <button type="submit">Update</button>
     </form>
 
