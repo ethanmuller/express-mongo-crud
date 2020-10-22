@@ -55,6 +55,16 @@ MongoClient.connect(process.env.CONNECTION_STRING, { useUnifiedTopology: true })
         });
     });
 
+    app.post('/:id/delete', (req, res) => {
+      passagesCollection.deleteOne({ '_id': ObjectId(req.params.id) })
+        .then(results => {
+          res.redirect(`/`);
+        })
+        .catch((err) => {
+          console.log('ohh noooo')
+        });
+    });
+
     app.listen(3000, (req, res) => {
       console.log('listening on port 3000');
     });
