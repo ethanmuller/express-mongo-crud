@@ -15,7 +15,7 @@
     <h2>passages</h2>
     <ul>
       <% for(var i = 0; i < passages.length; i++) { %>
-        <li><a href="/<%= passages[i]['_id'] %>"><%= passages[i].passage %></a></li>
+        <li><a href="/<%= passages[i]['_id'] %>"><%= passages[i].passage || 'untitled' %></a></li>
       <% } %>
     </ul>
   </body>
