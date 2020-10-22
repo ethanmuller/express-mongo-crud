@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>mush</title>
+  </head>
+
+  <body>
+    <h1>mush</h1>
+
+    <form action="/passages" method="POST">
+      <textarea name="passage"></textarea>
+      <button type="submit">Add</button>
+    </form>
+    <h2>passages</h2>
+    <ul>
+      <% for(var i = 0; i < passages.length; i++) { %>
+        <li><a href="/<%= passages[i]['_id'] %>"><%= passages[i].passage %></a></li>
+      <% } %>
+    </ul>
+  </body>
+</html>

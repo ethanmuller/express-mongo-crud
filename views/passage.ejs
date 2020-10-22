@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>mush</title>
+  </head>
+
+  <body>
+    <h1>passage: <%= passage.passage %></h1>
+
+    <form action="/<%= passage['_id'] %>" method="POST">
+      <textarea name="passage"><%= passage.passage %></textarea>
+      <button type="submit">Update</button>
+    </form>
+  </body>
+</html>
