@@ -15,18 +15,23 @@ MongoClient.connect(process.env.CONNECTION_STRING, { useUnifiedTopology: true })
     const passagesCollection = db.collection('old-man');
 
     app.get('/', (req, res) => {
-      passagesCollection.find().sort({ '_id': -1 }).toArray()
+      // index
+      passagesCollection.find({ parent_id: null }).sort({ '_id': 1 }).toArray()
         .then(results => {
           res.render('index.ejs', { passages: results });
         })
         .catch(console.error);
     });
 
-    app.get('/:id', (req, res) => {
+    app.get('/:id', async (req, res) => {
+      // this promise chain is horrible. how can i make it better?
       passagesCollection.findOne({ '_id': ObjectId(req.params.id) })
         .then(results => {
-          console.log(results)
-          res.render('passage.ejs', { passage: results });
+          passagesCollection.find({ 'parent_id': req.params.id }).toArray()
+            .then(children => {
+              results.actions = children;
+              res.render('passage.ejs', { passage: results });
+            });
         })
         .catch((err) => {
           console.log('ohh noooo')
@@ -37,7 +42,7 @@ MongoClient.connect(process.env.CONNECTION_STRING, { useUnifiedTopology: true })
       passagesCollection.insertOne(req.body)
         .then(result => {
           console.log(result.insertedId);
-          res.redirect('/');
+          res.redirect(`/${result.insertedId}`);
         })
         .catch(console.error);
     });

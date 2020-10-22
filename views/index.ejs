@@ -9,13 +9,13 @@
     <h1>mush</h1>
 
     <form action="/passages" method="POST">
-      <input type="text" name="passage">
-      <button type="submit">Add</button>
+      <input type="text" name="name">
+      <button type="submit">add room</button>
     </form>
-    <h2>passages</h2>
+    <h2>rooms</h2>
     <ul>
       <% for(var i = 0; i < passages.length; i++) { %>
-        <li><a href="/<%= passages[i]['_id'] %>"><%= passages[i].passage || 'untitled' %></a></li>
+        <li><a href="/<%= passages[i]['_id'] %>"><%= passages[i]['name'] || passages[i]['_id'] %></a></li>
       <% } %>
     </ul>
   </body>
