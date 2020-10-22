@@ -3,6 +3,7 @@ const express = require('express');
 const { MongoClient, ObjectId } = require('mongodb');
 const bodyParser = require('body-parser');
 const app = express();
+const port = process.env.PORT || 3000
 
 app.set('view engine', 'ejs');
 
@@ -70,8 +71,8 @@ MongoClient.connect(process.env.CONNECTION_STRING, { useUnifiedTopology: true })
         });
     });
 
-    app.listen(3000, (req, res) => {
-      console.log('listening on port 3000');
+    app.listen(port, (req, res) => {
+      console.log('listening on port');
     });
   })
   .catch(console.error);

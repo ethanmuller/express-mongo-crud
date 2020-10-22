@@ -8,35 +8,37 @@
   <body>
     <div style="text-align: right;"><a href="/">🍄</a></div>
 
-    <% if (passage.parent_id) { %>
-      <p style="font-size: 0.8rem;"><a href="/<%= passage.parent_id %>">&lt;- previous scene</a></p>
-      <p style="font-size: 0.8rem;">scene after you <strong><%= passage.action_text %></strong></p>
-    <% } %>
+    <main>
+      <% if (passage.parent_id) { %>
+        <p style="font-size: 0.8rem;"><a href="/<%= passage.parent_id %>">&lt;- previous scene</a></p>
+        <p style="font-size: 0.8rem;">scene after you <strong><%= passage.action_text %></strong></p>
+      <% } %>
 
-    <form action="/<%= passage['_id'] %>" method="POST" style="margin-bottom: 3rem;">
-      <div><textarea name="passage" cols="50" rows="10" style="padding: 1rem; font-size: 1.2rem; margin-top: 3rem;"><%= passage.passage %></textarea></div>
-      <button type="submit" style="font-size: 0.6rem; padding: 0;">Update</button>
-    </form>
+      <form action="/<%= passage['_id'] %>" method="POST" style="margin-bottom: 3rem;">
+        <div><textarea name="passage" cols="50" rows="10" style="padding: 1rem; font-size: 1.2rem; margin-top: 3rem;"><%= passage.passage %></textarea></div>
+        <button type="submit" style="font-size: 0.6rem; padding: 0;">Update</button>
+      </form>
 
 
-    <% if (passage.actions && passage.actions.length > 0) { %>
-    <h2>what do you do?</h2>
-    <ul>
-      <% for(var i = 0; i < passage.actions.length; i++) { %>
-          <li><a href="/<%= passage.actions[i]['_id'] %>"><%= passage.actions[i].action_text %></a></li>
-        <% } %>
-      </ul>
-    <% } %>
+      <% if (passage.actions && passage.actions.length > 0) { %>
+        <h2>what do you do?</h2>
+        <ul>
+          <% for(var i = 0; i < passage.actions.length; i++) { %>
+            <li><a href="/<%= passage.actions[i]['_id'] %>"><%= passage.actions[i].action_text %></a></li>
+          <% } %>
+        </ul>
+      <% } %>
 
-    <form action="/passages" method="POST">
-      <input type="text" name="action_text" value="" required>
-      <input type="hidden" name="parent_id" value="<%= passage['_id'] %>">
-      <button type="submit">Add Action</button>
-    </form>
+      <form action="/passages" method="POST">
+        <input type="text" name="action_text" value="" required>
+        <input type="hidden" name="parent_id" value="<%= passage['_id'] %>">
+        <button type="submit">Add Action</button>
+      </form>
 
-    <form action="/<%= passage['_id'] %>/delete" method="POST" style="margin-top: 5rem; opacity: 0.3;">
-      <input type="submit" value="delete">
-    </form>
+      <form action="/<%= passage['_id'] %>/delete" method="POST" style="margin-top: 5rem; opacity: 0.3;">
+        <input type="submit" value="delete">
+      </form>
+    </main>
     
   </body>
 </html>
